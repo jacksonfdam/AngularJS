@@ -67,6 +67,9 @@ http://willianjusten.com.br/o-basico-da-api-do-reactjs/
 
 ##AngularJS
 
+### do Jquery para o Angular
+http://cironunes.com/jquery-to-angular/
+
 ### Offline API First
 http://nomadev.com.br/fullstack-offline-api-first/
 
@@ -97,3 +100,7 @@ http://fdietz.github.io/recipes-with-angular-js/index.html
 ### Treinamento de AngularJS do QMágico
 https://github.com/qmagico/treinamento-angularjs
 
+### Usando React com Angular
+http://www.williambrownstreet.net/blog/2014/04/faster-angularjs-rendering-angularjs-and-reactjs/
+https://www.airpair.com/angularjs/posts/angular-vs-react-the-tie-breaker
+https://www.quora.com/Pete-Hunt/Posts/Facebooks-React-vs-AngularJS-A-Closer-Look
