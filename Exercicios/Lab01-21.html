@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+	<meta charset=utf-8 />
+	<title>Lab01-21</title>
+</head>
+<body ng-app="labApp">
+	<!-- Sempre use ng-href quando href inclui uma {{expression}}-->
+	<a ng-href="{{myHref}}">Estou com sorte, quando eu carregar</a>
+	<!-- href não pode carregar antes usuário clicar -->
+	<a href="{{myHref}}">Estou me sentindo 404</a>
+
+
+	<script type="text/javascript">
+		var labApp = angular.module('labApp', [])
+		.run(function($rootScope, $timeout) {
+			$timeout(function() {
+				$rootScope.myHref = 'http://google.com';
+			}, 2000);
+		});
+	</script>
+</body>
+</html>

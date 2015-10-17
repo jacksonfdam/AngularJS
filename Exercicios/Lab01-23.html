@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+	<meta charset=utf-8 />
+	<title>Lab01-23</title>
+</head>
+<body ng-app="labApp">
+	{{ someProperty }}
+	<button ng-click="someAction()"></button>
+
+	<script type="text/javascript">
+		var labApp = angular.module('labApp', [])
+		.run(function($rootScope) {
+			$rootScope.someProperty = 'Olá, computador';
+			$rootScope.someAction = function() {
+				$rootScope.someProperty = 'Olá humano';
+			};
+		});
+	</script>
+</body>
+</html>

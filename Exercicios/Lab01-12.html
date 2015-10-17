@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+	<meta charset=utf-8 />
+	<title>Lab01-12</title>
+</head>
+<body ng-app="labApp">
+	<div my-directive
+	my-url="http://google.com"
+	my-link-text="Ir para o Google">
+</div>
+
+<script type="text/javascript">
+	angular.module('labApp', [])
+	.directive('myDirective', function() {
+		return {
+			restrict: 'A',
+			replace: true,
+			template: '<a href="{{myUrl}}">{{myLinkText}}</a>'
+		}
+	})</script>
+</body>
+</html>

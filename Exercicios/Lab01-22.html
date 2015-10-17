@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+	<meta charset=utf-8 />
+	<title>Lab01-22</title>
+</head>
+<body ng-app="labApp">
+	<h1>Forma errada</h1>
+	<img src="{{imgSrc}}" />
+	<h1>Maneira correta</h1>
+	<img ng-src="{{imgSrc}}" />
+
+	<script type="text/javascript">
+		var labApp = angular.module('labApp', [])
+		.run(function($rootScope, $timeout) {
+			$timeout(function() {
+				$rootScope.imgSrc = 'https://www.google.com/images/srpr/logo11w.png';
+			}, 2000);
+		});
+	</script>
+</body>
+</html>

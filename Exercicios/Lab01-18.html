@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+	<meta charset=utf-8 />
+	<title>Lab01-18</title>
+	<link rel="stylesheet" href="http://cdn.jsdelivr.net/foundation/4.3.2/css/foundation.min.css">
+	<style type="text/css">
+		input.ng-invalid {
+			border: 1px solid red;
+		}
+
+		input.ng-valid {
+			border: 1px solid green;
+		}</style>
+	</head>
+	<body ng-app="labApp">
+		<form name="signup_form" ng-controller="FormController" ng-submit="submitForm()" novalidate>
+			<div ng-repeat="field in fields" ng-form="signup_form_input">
+				<input type="text"
+				name="dynamic_input"
+				ng-required="field.isRequired"
+				ng-model="field.name"
+				placeholder="{{field.placeholder}}" />
+				<div ng-show="signup_form_input.dynamic_input.$dirty && signup_form_input.dynamic_input.$invalid">
+					<span class="error" ng-show="signup_form_input.dynamic_input.$error.required">The field is required.</span>
+				</div>
+			</div>
+			<button type="submit" ng-disabled="signup_form.$invalid">Enviar</button>
+		</form>
+
+		<script type="text/javascript">
+			angular.module('labApp', [])
+			.controller('FormController', function($scope) {
+				$scope.fields = [
+					{placeholder: 'Usuario', isRequired: true},
+					{placeholder: 'Senha', isRequired: true},
+					{placeholder: 'E-mail (opcional)', isRequired: false}
+				];
+
+				$scope.submitForm = function() {
+					alert("Funcionou!");
+				};
+			});
+		</script>
+	</body>
+	</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+	<meta charset=utf-8 />
+	<title>Lab01-15</title>
+</head>
+<body ng-app="labApp">
+	<label>O Campo de URL:</label><br/>
+	<input type="text" ng-model="theirUrl"><br/>
+	<div my-directive some-attr="theirUrl" my-link-text="Me leve ao Google"></div>
+
+	<script type="text/javascript">
+		angular.module('labApp', [])
+		.directive('myDirective', function() {
+			return {
+				restrict: 'A',
+				replace: true,
+				scope: {
+					myUrl: '=someAttr',
+					myLinkText: '@'
+				},
+				template: '\
+				<div>\
+					<label>O box de URL:</label><br/>\
+					<input type="text"\
+					ng-model="myUrl" /> <br/>\
+					<a href="{{myUrl}}">{{myLinkText}}</a>\
+				</div>\
+				'
+			}
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+	<meta charset=utf-8 />
+	<title>Lab01-24</title>
+	<style type="text/css">
+		.red { color:red; }
+	</style>
+</head>
+<body ng-app="labApp">
+	<div ng-controller="Ctrl">
+		<select ng-model="template" ng-options="t.name for t in templates">
+			<option value="">(blank)</option>
+		</select>
+		Url do template: <tt>{{template.url}}</tt>
+		<hr/>
+		<div ng-include src="template.url" onload='myFunction()'></div>
+	</div>
+
+	<!-- template1.html -->
+	<script type="text/ng-template" id="template1.html">
+		Conteúdo do template 01
+	</script>
+
+	<!-- template2.html -->
+	<script type="text/ng-template" id="template2.html">
+		<p ng-class="color">Conteúdo do template 02</p>
+	</script>
+
+
+
+	<script type="text/javascript">
+		var labApp = angular.module('labApp', []);
+		function Ctrl($scope) {
+			$scope.templates = [{
+				name: 'template1.html',
+				url: 'template1.html'},
+				{
+					name: 'template2.html',
+					url: 'template2.html'}];
+					$scope.template = $scope.templates[0];
+
+					$scope.myFunction = function() {
+						$scope.color = 'red';
+					}
+				}
+			</script>
+		</body>
+		</html>

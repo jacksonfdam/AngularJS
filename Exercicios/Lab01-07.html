@@ -1,0 +1,28 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+</script>
+</head>
+<body>
+	<div ng-controller="ParentController">
+		<div ng-controller="ChildController">
+			<a ng-click="sayHello()">Diga olá, </a>
+		</div>
+		{{ person }}
+	</div>
+
+	<script type="text/javascript">
+		var app = angular.module('app', []);
+		app.controller('ParentController', function($scope) {
+			$scope.person = {greeted: false};
+		});
+		app.controller('ChildController', function($scope) {
+			$scope.sayHello = function() {
+				$scope.person.name = "Jackson Mafra";
+				$scope.person.greeted = true;
+			}
+		});
+	</script>
+</body>
+</html>

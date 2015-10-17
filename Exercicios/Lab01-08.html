@@ -1,0 +1,27 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+</script>
+</head>
+<body>
+	<div ng-controller="ExpController">
+		<input ng-model="expr"
+		type="text"
+		placeholder="Entre uma Expressao" />
+		<h2>{{ parsedValue }}</h2>
+	</div>
+	<script type="text/javascript">
+		angular.module("app", [])
+		.controller('ExpController',
+			function($scope, $parse) {
+				$scope.$watch('expr', function(newVal, oldVal, scope) {
+					if (newVal !== oldVal) {
+						var parseFun = $parse(newVal);
+						$scope.parsedValue = parseFun(scope);
+					}
+				});
+			});
+	</script>
+</body>
+</html>
