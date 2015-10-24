@@ -36,9 +36,1063 @@
 
     ---
 
+    # Angular
+    ###Intro
+
+    AngularJS extends HTML with new attributes.
+
+    AngularJS is perfect for *Single Page Applications* (**SPAs**).
+
+    AngularJS is easy to learn.
+
+    ---
+
+    # Angular
+
+    AngularJS is a JavaScript framework. It can be added to an HTML page with a `<script>` tag.
+
+    AngularJS extends HTML attributes with Directives, and binds data to HTML with Expressions.
+
+    AngularJS is a JavaScript **framework**. It is a library written in JavaScript.
+
+    AngularJS is distributed as a JavaScript file, and can be added to a web page with a script tag:
+
+    `<script src="angular.min.js"></script>`
+
+    ---
+
+    # AngularJS Extends HTML
+
+    AngularJS extends HTML with ng-directives.
+
+    The **ng-app** directive defines an AngularJS application.
+
+    The **ng-model** directive binds the value of HTML controls (input, select, textarea) to application data.
+
+    The **ng-bind** directive binds application data to the HTML view.
+
+
+    ---
+
+    # Angular
+
+        <!DOCTYPE html>
+        <html>
+        <script src="angular.min.js"></script>
+        <body>
+        
+        <div ng-app="">
+            <p>Name: <input type="text" ng-model="name"></p>
+            <p ng-bind="name"></p>
+        </div>
+        
+        </body>
+        </html>
+
+
+    ---
+
+    # Example explained
+
+    AngularJS starts automatically when the web page has loaded.
+
+    The ***ng-app*** directive tells AngularJS that the `<div>` element is the "***owner***" of an AngularJS application.
+
+    The **ng-model** directive binds the value of the input field to the application variable name.
+
+    The **ng-bind** directive binds the innerHTML of the <p> element to the application variable name.
+
+    ---
+
+    #How Angular Boots
+
+    It’s important to have a rough mental model about what Angular is actually doing when our page loads. When we include the Angular javascript into our HTML page, it will attach a method to the DOMContentLoaded event (this means that Angular will run when the page is done loading). When the page has loaded, Angular will visit every element in your HTML document (i.e. it will traverse every element in the DOM). If Angular visits an element which contains a directive it will attach a behavior to it.
+
+    The very first directive Angular needs to find is the *ngApp* directive. Angular will bind our application to the element where it finds the ngApp directive.
+
+    ---
+
+    More often than not, we’ll want to define a custom angular app instead of the default one provided by ngApp. We can declare that we want to use a custom angular module by giving a name as an argument to the ngApp directive.
+
+    That is, we would change the div above from:
+
+        <div id="app" ng-app>
+
+    to
+
+        <div id="app" ng-app='myApp'>
+
+    Now, Angular will look for the Angular app called myApp and throw an error to let us know if it cannot find it.
+
+    [Angular documentation on ngApp](http://docs.angularjs.org/api/ng.directive:ngApp)
+
+    [Placement of the ng-app directive - html vs body](http://stackoverflow.com/questions/15790432/placement-of-the-ng-app-directive-html-vs-body)
+
+    ---
+    # Directives
+    As you have already seen, AngularJS directives are HTML attributes with an ***ng*** prefix.
+
+    The *ng-init* directive initialize AngularJS application variables.
+
+        <div ng-app="" ng-init="firstName='Jackson'">
+        
+        <p>The name is <span ng-bind="firstName"></span></p>
+        
+        </div>
+
+    ---
+    class: center, middle
+
+    A *directive* is simply a *function* that we run on a DOM element to give it added functionality. *In Angular, we’ll use directives everywhere.*
+
+    ---
+    class: center, middle
+
+    This is important to realize: when looking at the markup of an Angular app, all of the ng- tags are Angular provided directives.
+
+    ---
+
+    There are a lot of built-in directives provided by Angular.
+
+    When we talk about directives, we’ll use lowerCamelCase method (e.g. ngClick) to refer to the directive. This is because in the AngularJS source code it is defined as a function called ngClick. However, when we use a directive in HTML we use “kabob case” (e.g. ng-click). Basically: ngClick and ng-click refer to the same thing, AngularJS automatically converts between the two. It can be a little confusing at first, but the idea is that it makes each code look better in context.
+
+
+    ---
+
+    # Directives
+
+        <div data-ng-app="" data-ng-init="firstName='John'">
+        
+        <p>The name is <span data-ng-bind="firstName"></span></p>
+        
+        </div>
+        
+    You can use ***data-ng-***, instead of ***ng-***, if you want to make your page HTML valid.
+
+    ---
+    #Directives
+    ###Data Binding
+    The *{{ firstName }}* expression, in the example above, is an AngularJS data binding expression.
+
+    Data binding in AngularJS ***synchronizes*** AngularJS *expressions* with AngularJS *data*.
+
+    {{ firstName }} is *synchronized* with ng-model="firstName".
+
+    In the next example two text fields are synchronized with two ng-model directives:
+
+        <div ng-app="" ng-init="quantity=1;price=5">
+        Quantity: <input type="number"  ng-model="quantity">
+        Costs:    <input type="number" ng-model="price">
+        Total in dollar: {{ quantity * price }}
+        </div>
+    ---
+
+    #Directives
+
+    Repeating HTML Elements
+    The ng-repeat directive repeats an HTML element:
+
+        
+        <div ng-app="" ng-init="names=['Jani','Hege','Kai']">
+          <ul>
+            <li ng-repeat="x in names">
+              {{ x }}
+            </li>
+          </ul>
+        </div>
+
+    The ng-repeat directive used on an array of objects:
+
+        <div ng-app="" ng-init="names=[
+        {name:'Jani',country:'Norway'},
+        {name:'Hege',country:'Sweden'},
+        {name:'Kai',country:'Denmark'}]">
+        
+        <ul>
+          <li ng-repeat="x  in names">
+            {{ x.name + ', ' + x.country }}
+          </li>
+        </ul>
+        
+        </div>
+
+    The ng-repeat directive clones HTML elements once for each item in a collection (in an array).
+
+    AngularJS is perfect for database CRUD (Create Read Update Delete) applications.
+
+    Just imagine if these objects were records from a database.
+
+    ---
+    #The ng-app Directive
+
+    The ng-app directive defines the root element of an AngularJS application.
+
+    The ng-app directive will auto-bootstrap (automatically initialize) the application when a web page is loaded.
+
+    Later you will learn how ng-app can have a value (like ng-app="myModule"), to connect code modules.
+
+    ---
+
+
+    #The ng-init Directive
+
+    The ng-init directive defines initial values for an AngularJS application.
+
+    Normally, you will not use ng-init. You will use a controller or module instead.
+
+    You will learn more about controllers and modules later.
+
+    ---
+    #The ng-model Directive
+
+    The ng-model directive binds the value of HTML controls (input, select, textarea) to application data.
+
+    The ng-model directive can also:
+
+     - Provide type validation for application data (number, email,
+       required). 
+     -  Provide status for application data (invalid, dirty,
+     - Provide CSS classes for HTML elements. 
+     - Bind HTML elements to HTML forms.
+
+    ---
+
+    # Expressions
+
+    AngularJS **expressions** are written inside double braces: *{{ expression }}.*
+
+    AngularJS will "output" data exactly where the expression is written:
+
+        <!DOCTYPE html>
+        <html>
+        <script src="angular.min.js"></script>
+        <body>
+        
+        <div ng-app="">
+            <p>My first expression: {{ 5 + 5 }}</p>
+        </div>
+        
+        </body>
+        </html>
+
+    ---
+
+    # Expressions
+
+    AngularJS expressions bind AngularJS data to HTML the same way as the ng-bind directive.
+
+        <!DOCTYPE html>
+        <html>
+        <script src="angular.min.js"></script>
+        <body>
+        
+        <div ng-app="">
+          <p>Name: <input type="text" ng-model="name"></p>
+          <p>{{name}}</p>
+        </div>
+        
+        </body>
+        </html>
+
+
+    ---
+    # Expressions
+
+    If you remove the ng-app directive, HTML will display the expression as it is, without solving it:
+
+        <!DOCTYPE html>
+        <html>
+        <script src="angular.min.js"></script>
+        <body>
+        
+        <div>
+            <p>My first expression: {{ 5 + 5 }}</p>
+        </div>
+        
+        </body>
+        </html>
+
+    ---
+    #Numbers
+
+    AngularJS numbers are like JavaScript numbers:
+
+        <div ng-app="" ng-init="quantity=1;cost=5">
+        
+        <p>Total in dollar: {{ quantity * cost }}</p>
+        
+        </div>
+        
+    Same example using ng-bind:
+
+        <div ng-app="" ng-init="quantity=1;cost=5">
+        
+        <p>Total in dollar: <span ng-bind="quantity * cost"></span></p>
+        
+        </div>
+
+    *Using ng-init is not very common. You will learn a better way to initialize data in the chapter about controllers.*
+
+
+    ---
+    #Strings
+    AngularJS strings are like JavaScript strings:
+
+        
+        <div ng-app="" ng-init="firstName='John';lastName='Doe'">
+        
+        <p>The name is {{ firstName + " " + lastName }}</p>
+        
+        </div>
+
+    Same example using ng-bind:
+
+        
+        <div ng-app="" ng-init="firstName='John';lastName='Doe'">
+        
+        <p>The name is <span ng-bind="firstName + ' ' + lastName"></span></p>
+        
+        </div>
+
+    ---
+    #Objects
+
+    AngularJS objects are like JavaScript objects:
+
+        
+        <div ng-app="" ng-init="person={firstName:'John',lastName:'Doe'}">
+        
+        <p>The name is {{ person.lastName }}</p>
+        
+        </div>
+
+    Same example using ng-bind:
+
+        
+        <div ng-app="" ng-init="person={firstName:'John',lastName:'Doe'}">
+        
+        <p>The name is <span ng-bind="person.lastName"></span></p>
+        
+        </div>
+
+
+
+    ---
+    #Arrays
+    AngularJS arrays are like JavaScript arrays:
+
+        
+        <div ng-app="" ng-init="points=[1,15,19,2,40]">
+        
+        <p>The third result is {{ points[2] }}</p>
+        
+        </div>
+
+    Same example using ng-bind:
+
+        
+        <div ng-app="" ng-init="points=[1,15,19,2,40]">
+        
+        <p>The third result is <span ng-bind="points[2]"></span></p>
+        
+        </div>
+
+    ---
+    #AngularJS Expressions vs. JavaScript Expressions
+
+    Like JavaScript expressions, AngularJS expressions can contain literals, operators, and variables.
+
+    Unlike JavaScript expressions, AngularJS expressions can be written inside HTML.
+
+    AngularJS expressions do not support conditionals, loops, and exceptions, while JavaScript expressions do.
+
+    AngularJS expressions support filters, while JavaScript expressions do not.
+
+
+    ---
+
+    # Applications
+
+    AngularJS **modules** define AngularJS applications.
+
+    AngularJS **controllers** control AngularJS applications.
+
+    The ***ng-app*** directive defines the **application**, the ***ng-controller*** directive defines the **controller**.
+
+        <div ng-app="myApp" ng-controller="myCtrl">
+        
+        First Name: <input type="text" ng-model="firstName"><br>
+        Last Name: <input type="text" ng-model="lastName"><br>
+        <br>
+        Full Name: {{firstName + " " + lastName}}
+        
+        </div>
+        
+        <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope) {
+            $scope.firstName= "Jackson";
+            $scope.lastName= "Mafra";
+        });
+        </script>
+
+    ---
+
+    # Applications
+
+    AngularJS modules define applications:
+
+    AngularJS Module
+
+        var app = angular.module('myApp', []);
+        AngularJS controllers control applications:
+
+    AngularJS Controller
+
+        app.controller('myCtrl', function($scope) {
+            $scope.firstName= "John";
+            $scope.lastName= "Doe";
+        });
+
+    ---
+
+    #Modules
+
+    Once we get to our javascript code, wow do we tell Angular where our angular app is? We need to define it using the angular.module() API. There are two main operations when dealing with a module:
+
+     1. creating a new module (i.e. the “setter”) or
+     2. getting a reference to an existing module (i.e. the “getter”)
+
+    When we want to create a module we use the setter arguments:
+
+        angular.module('myApp', []);
+
+    When we want to get an existing module we use the getter arguments (i.e. no arguments):
+
+        angular.module('myApp');
+
+    ---
+
+    #Modules
+
+    Once we’ve created the module myApp, we can assign the app to a particular place in our code by using the ng-app directive. For instance, if we have the following html:
+
+        <html ng-app="myApp">
+          <head>
+            <!-- etc. -->
+          </head>
+          <body>
+            <!-- etc. -->
+          </body>
+        </html>
+
+
+    ---
     
+    #Modules
+
+    myApp is essentialy the “main” module for the page and the app will be automatically started (also known as bootstrapped) for us when the page is done rendering.
+
+    A module, in Angular terms is simply a collection of Angular objects that define a set of functionality.
+
+
+
+    ---
+    
+    #Modules
+
+    We can think about a car as a collection of modules. From the driver’s perspective, the car is an automobile that works by turning a steering wheel and pushing some pedals. The car consists of independent modules such as the seat belts, the engine, the wheels, etc. that all work together doing their own individual jobs.
+
+    [Angular documentation on modules](http://docs.angularjs.org/guide/module)
+
+    [ngModules directory](http://ngmodules.org/)
+
+    ---
+
+    #Scopes
+
+    The next concept we need to understand when learning Angular is the concept of scopes. AngularJS uses scopes to communicate between components - particularly between our javascript and our HTML. Scopes are the glue between our code and what the browser renders.
+
+
+    ---
+    
+    #Scopes
+
+    For example, say we want to show a welcome message to a user. We can use the $scope variable in our JavaScript code to make the user variable accessible to our view, the HTML:
+
+        angular.module('myApp') // <-- This is the getter function for a module previously defined
+        .run(function($rootScope) {
+        $rootScope.user = {
+        email: 'ari@fullstack.io'
+        }
+        });
+
+    Now the HTML for our angular app can access the user variable in the view and bind it in our view.
+
+        <span>Welcome back {{ user.email }}</span>
+
+
+    ---
+    
+    #Scopes
+    ###Angular has many scopes
+
+    A powerful (but potentially confusing) feature of Angular is that you can have many scopes in your Angular application. The $rootScope is the top level scope for the rest of our application.
+
+    That means that anywhere in the view (i.e. all children elements under the DOM element with the ngApp directive) we can reference variables that are on the $rootScope object.
+
+    ---
+    class: center, middle
+
+    #Scopes
+
+    Whats with the $dollar sign? AngularJS uses the dollar sign $ as a prefix for many Angular built-in functions and objects. 
+
+    Using $ as a naming convention acts as a namespace for Angular-reserved keywords. 
+
+    Don’t use a $ prefix when naming your services or you may run into conflicts with the core library.
+
+
+    ---
+    #Scopes
+
+    Just like our DOM elements are nested in each other, scope objects can be nested. In the same way the HTML tags can have a parent, scopes can have a parent. 
+
+    When Angular looks up the value of a variable it will look at the current scope and then look “upwards” for the variable in any of the parent scopes.
+
+    ---
+    class: center, middle
+
+    A scope is a plain old javascript object (also known as a POJO). Although a scope does have functionality that makes it really useful, it isn’t magic. Scopes are javascript objects just like everything else in our program.
+
+    ---
+    class: center, middle
+
+    #Summary
+
+    Scopes are a way to organize key-value pairs without polluting a global namespace.
+
+    ---
+
+    For example, say we want to show a welcome message to a user. We can use the $scope variable in our JavaScript code to make the user variable accessible to our view, the HTML:
+
+        angular.module('myApp') // <-- This is the getter function for a module previously defined
+        .run(function($rootScope) {
+          $rootScope.user = {
+            email: 'ari@fullstack.io'
+          }
+        });
+    
+    Now the HTML for our angular app can access the user variable in the view and bind it in our view.
+
+        <span>Welcome back {{ user.email }}</span>
+
+    ---
+
+    When we say binding in Angular, we mean any value that is showing in the view. This happens primarily with data that is shown in the view using the template syntax {{ }}. In case you’re wondering, the template syntax works by using a directive (the ng-bind directive).
+
+
+    ---
+
+    When the view loads up, our Angular app will look for the user variable in the $scope object and display it’s email attribute. This is a powerful concept: we assigned a variable user on $rootScope and Angular made this variable accessible to our view automatically.
+
+    An important thing to note is that this binding goes both ways. Our view can change the value of a variable. For instance, we can type a message in an input box (using the ngModel directive) and it will change the message in our JavaScript.
+
+
+    ---
+
+    # Controllers
+
+    While directives are typically used on a single DOM element, Angular uses the concept of controllers to organize functionality across a group of DOM elements.
+
+    A controller is a bit of code that defines functionality for a part of the page.
+
+    Take a look at this example:
+
+        angular.module('myApp')
+        .controller('HomeController', function($scope) {
+            // We have access to this new 
+            // $scope object where we can place
+            // data and functions to interact with it
+        });
+
+
+    ---
+
+    # Controllers
+
+    Now we have a controller defined, we can place it on the page using the ngController directive, like so:
+
+        <div ng-controller='HomeController'>
+            <!-- 
+            In here, we have access to the
+            $scope object defined by the HomeController
+            -->
+        </div>
+
+
+    ---
+
+    # Controllers
+
+    Now, instead of placing all of our functionality on the special $rootScope object, we place can place it on the HomeController’s $scope object and keep our $rootScope clean.
+
+    ---
+
+    # Controllers
+
+    The example above demonstrated a controller object with two properties: lastName and firstName.
+
+    A controller can also have methods (variables as functions):
+
+        <div ng-app="myApp" ng-controller="personCtrl">
+
+        First Name: <input type="text" ng-model="firstName"><br>
+        Last Name: <input type="text" ng-model="lastName"><br>
+        <br>
+        Full Name: {{fullName()}}
+
+        </div>
+
+        <script>
+        var app = angular.module('myApp', []);
+        app.controller('personCtrl', function($scope) {
+            $scope.firstName = "John";
+            $scope.lastName = "Doe";
+            $scope.fullName = function() {
+                return $scope.firstName + " " + $scope.lastName;
+            }
+        });
+        </script>
+    
+    ---
+
+    # Controllers In External Files
+
+    In larger applications, it is common to store controllers in external files.
+
+    Just copy the code between the <script> tags into an external file named personController.js:
 
     
+        <div ng-app="myApp" ng-controller="personCtrl">
+
+        First Name: <input type="text" ng-model="firstName"><br>
+        Last Name: <input type="text" ng-model="lastName"><br>
+        <br>
+        Full Name: {{firstName + " " + lastName}}
+
+        </div>
+
+        <script src="personController.js"></script>
+    
+    ---
+
+    # Another Example
+
+    For the next example we will create a new controller file:
+
+        angular.module('myApp', []).controller('namesCtrl', function($scope) {
+            $scope.names = [
+                {name:'Jani',country:'Norway'},
+                {name:'Hege',country:'Sweden'},
+                {name:'Kai',country:'Denmark'}
+            ];
+        });
+        Save the file as  namesController.js:
+    
+    ---
+
+    # Controllers
+
+    And then use the controller file in an application:
+
+        <div ng-app="myApp" ng-controller="namesCtrl">
+
+        <ul>
+          <li ng-repeat="x in names">
+            {{ x.name + ', ' + x.country }}
+          </li>
+        </ul>
+
+        </div>
+
+        <script src="namesController.js"></script>
+
+
+    
+    ---
+
+    # Controllers
+
+
+
+    ---
+
+    # Controllers
+
+    The benefit of creating a new scope is that we’re able to keep variables and data contained to this specific part of the page. We can define a new variable without it polluting or conflicting with another part of the page.
+
+    Technically, every time that we create a new controller, Angular creates a new $scope object underneath the parent scope. (In this case the parent is $rootScope.)
+
+    ---
+    class: center, middle
+
+    # Summary
+
+    A controller is code that ties models to views using scopes
+
+
+    ---
+
+    # Model-view-controller pattern
+
+    Angular supports the Model-View-Controller (aka MVC) software design pattern.
+
+    If you’re not familiar with MVC, the basic idea is that the model is the core data of our application (e.g. a car), the view is the user interface into our application (e.g. the page showing the car), and the controller is the code that ties the two together.
+
+    ---
+
+    # Model-view-controller pattern
+
+    In our Angular code, the controller is responsible for updating the model. The controller can also talk to the view, but in Angular it does this through the $scope object.
+
+    The view is the interface the user sees and interacts with. In Angular the view is the HTML. As a user we only interact with the view and Angular manages how the view modifies the $scope.
+
+    ---
+
+    # $http
+
+    Once we understand how to interact with data from within our own application, then the next logical step is to get data from the outside world and use it in our application.
+
+    ##How can we interact with back-end APIs with Angular?
+
+    Angular comes bundled with a wrapper around the XMLHttpRequest (also known as XHR, which is how you perform AJAX) called $http. The $http object is a library that helps you make HTTP requests and then parse the response. We often use $http
+
+    ---
+
+    # $http, XHR, and Promises
+
+        $http({
+            method: 'GET',
+            url: 'http://foo.com/v1/api',
+            params: {
+                api_key: 'abc'
+            }
+        });
+
+    When this method runs, it will go and make a GET request to the back-end server at http://foo.com/v1/api with the parameter of api_key=abc.
+
+    ---
+
+    # XHR
+
+    XHR requests are asynchronous. This means that our application doesn’t have to pause our application and wait for a response from the server. 
+
+    The benefit is that the user can continue to use our application while the HTTP request is being made, but it introduces problems because once the data does come back from the server we have to deal with it. 
+    
+    Because of this, asynchronous control flow it’s easy for our code to become cumbersome without the right tools.
+    
+    In general, we have two options:
+
+    - Pass a callback function. This is a function that will be called when the HTTP request completes.
+    - Use a promise. This is the approach Angular takes.
+
+    ---
+
+    # Promises
+
+    Promises are objects that help make working with async code feel like we’re writing synchronous code. Angular uses promises extensively, so it is important to get familiar with how to use them.
+
+    We use primarily only three methods when we use promises:
+
+        promise
+        .then(function(data) {
+            // Called when no errors have occurred with data
+        })
+        .catch(function(err) {
+            // Called when an error has occurred
+        })
+        .finally(function(data) {
+            // Called always, regardless of the output result
+        })
+
+    ---
+
+    # Promises
+
+    When we have a promise object, we can depend upon the .then() method to get called when we have a non-failure response, the catch() method to get called when there is an error, and the finally() method to get called regardless of the result of the function.
+
+    ---
+
+    # Promises
+
+    The $http object returns a promise when it’s completed the XHR request. Now, to interact with our request, we’ll simply use the .then() function to load the data on our $scope:
+
+        var promise = $http({
+            method: 'GET',
+            url: '/v1/api',
+            params: {
+                api_key: 'abc'
+            }
+        });
+        promise.then(function(obj) {
+            // obj is the raw request object generated by Angular
+            // and contains status codes, the raw data, headers,
+            // and the config function used to make the request
+            $scope.data = obj.data;
+        });
+
+
+    ---
+
+    # Using $http
+
+    Now that we know how to use the $http object, we can interact with it in our controller like so:
+
+        angular.module('myApp', [])
+        .controller('HomeController', function($scope, $http) {
+            $http({
+                method: 'GET',
+                url: '/v1/api',
+                params: {
+                    api_key: 'abc'
+                }
+            }).then(function(obj) {
+                $scope.data = obj.data;
+            });
+        });
+
+    This is for demonstration purposes only. Don’t use the $http object inside a controller, instead implement it with a service. We’ll look at services shortly.
+
+    ---
+    # Using $http
+
+    But wait… how did we get the $http object in the controller in the first place?
+
+        angular.module('myApp', [])
+        .controller('HomeController', function($scope, $http) {
+            // We have the $scope object and the $http object
+            // available in here
+        });
+
+   
+    ---
+    # Dependency Injection
+
+    Depdendency Injection (DI) is a term for how code gets a reference to it’s dependencies. 
+
+    Dependency injection, like use require in Node.js, require in Ruby, or import in Java refers to how objects get access to the dependencies they need to run properly. 
+
+    For instance, we’re not going to write the printf() function in C because we can us the libc library that has it implemented already. 
+
+    This libc library is considered a dependency.
+   
+    ---
+    # Dependency Injection
+
+    As a project becomes more complex, we’ll need to organize our code into modules. Somewhere along the way we have to include those modules into our final code.
+   
+    ---
+    # Dependency Injection
+
+    The situation is more complicated in client-side code because we’ll often load code from several different files. 
+
+    In the browser, when we’re loading several files from different locations at different times, they are returned in an unpredictable order. 
+
+    Without the right tools, managing this process can be a real pain.
+   
+    ---
+    # Dependency Injection
+
+    Thankfully AngularJS takes care of this for us - dependency injection is the solution to these problems.
+
+    “Dependency injection” refers the process of us telling Angular what dependencies we need to use and Angular resolving dependencies when we need them.
+   
+    ---
+    # Dependency Injection
+
+    For instance, in the following controller, we’ll want to get access to both the $scope object and the $q service. We’re telling (i.e. annotating) what we need to run our controller. Then, at runtime Angular will handle passing in (injecting) the dependencies for us.
+
+        angular.module('myApp', [])
+        .controller('HomeController', function($scope, $q) {
+          // We have the $scope object and the $q object
+          // available in here
+        });
+   
+    ---
+
+    # Dependency Injection
+
+    We’ve asked Angular to inject in the $scope object several times previously in this article, but we never really explained what it meant. 
+
+    When we specify $scope as an argument to the controller function, we’re telling Angular to make the $scope object available for us to use. 
+
+    Specifying dependencies by using the arguments of a function is a common pattern in Angular.
+   
+    ---
+
+    # Dependency Injection
+   
+    Here are a few things we need to know about dependency injection:
+
+    ***The names have to match an existing object***
+
+    ---
+
+    # Dependency Injection
+
+    Angular inspects the arguments to the function and infers that the variable “$scope” matches the $scope service. 
+
+    If we tried calling it $myScope, it won’t work.
+
+    The module you want to use has to be required into the current module
+   
+    ---
+
+    # Dependency Injection
+
+    If you want to depend on one of your custom modules from another custom module you use the setter syntax in the module function and supply requires in the second argument. Here’s an example:
+
+        // say we have some services...
+        angular.module('fullstack.services', [])
+          // some code that defines services here
+          .service('WeatherService', function() {
+            // define the weather service here
+          });
+        );
+
+        // and we want to use those services in our controllers
+        angular.module('fullstack.controllers', ['fullstack.services'])
+          // now we have WeatherService available
+        );
+   
+    ---
+    # Dependency Injection
+
+    The reason we can specify $scope and $q without specifying them as dependencies is because they are Angular built-ins so they’re already included.
+
+    > - The order doesn’t matter
+
+    
+    We could specify, say
+
+
+        .controller('HomeController', function($scope, $q) {
+    or
+
+        .controller('HomeController', function($q, $scope) {
+    
+   
+    ---
+    # Dependency Injection
+
+   
+    and either one will work.
+
+    > - You can’t have circular dependencies
+
+    If you try to, you’ll get an error.
+
+    > - There is an alternative syntax.
+
+    ---
+    # Dependency Injection
+
+    This is a bit of an advanced tip, but we will share it anyway, because we want you to recognize it in case you run into it.
+
+    When it comes time to create a production application, it’s common to “minify” the javascript. This minification process changes variable names and it will break Angular’s ability to infer variable names.
+
+    There is an alternative syntax to deal with this referred to as the “inline annotation”. This is what it looks like:
+
+        .controller('HomeController', ['$scope', '$q', function($scope, $q) {
+        // ...
+        }]);
+
+   
+    ---
+    # Services
+
+    Services are another core concept in AngularJS. When we used $http we were using an Angular service. Services are singleton objects that perform tasks common to several areas of the system.
+
+    - Take the $http service for example: performing HTTP requests doesn’t belong to a specific controller. We need to to make HTTP requests in lots of places in our code.
+
+    - If we want to set cookies in the user’s browser, that is a task that doesn’t belong to a specific controller either. To set cookies, we will use angular’s $cookies service.
+
+    - Say we were writing a weather app. We might write our own WeatherService which would be common code that we could use to get the weather at any point in our application.
+   
+    ---
+    # Services
+
+        angular.module('myApp.services', [])
+        .service('WeatherService', 
+        function($http) {
+            this.weatherFor = function(zip) {
+                // do something with $http to get the weather here  
+            };
+        });
+   
+    ---
+    # Services
+
+    Then we could use our weather service in our controller:
+
+        angular.module('myApp.controllers')
+        .controller('WeatherController', function($scope, WeatherService) {
+            $scope.weather = WeatherService.weatherFor(90210);
+        });
+   
+    ---
+    # Services
+   
+    To reiterate: services are only created once. There is only a single instance of a given service in your application.
+
+    ---
+    # Services
+
+    The idea here is that you want to keep your controllers thin. 
+
+    In the example above we technically could have written weather For in the controller directly, but by pulling it into a service we isolate responsibilities (e.g. each section of code does one thing). 
+
+    Also by having weatherFor in a service, that functionality is available to other controllers.
+   
+    ---
+    # Services
+
+    When we find our controllers getting bloated, it’s time to try to move code out of our controller and into a service. 
+
+    Not only is this good programming practice, it is easier to test services as a unit when they aren’t mixed up with the rest of our controller code.
+   
+    ---
+    # Services
+
+    *What’s the difference between a service, a factory, and a provider? As you read more Angular code you’ll see these three terms used almost interchangeably. 
+
+    That’s because *they’re all the same thing. service and factory are both implemented by provider under the hood. 
+
+    The difference is in the level of configuration you have when creating each one. 
+
+    For a concise example of the difference <a href="http://www.ng-newsletter.com/advent2013/#!/day/1">see here</a> or <a href="http://stackoverflow.com/questions/15666048/angular-js-service-vs-provider-vs-factory/17944367#17944367">here</a>. For a longer detailed explaination, <a href="http://stackoverflow.com/questions/15666048/angular-js-service-vs-provider-vs-factory/20613879#20613879">see here</a>. But for now, just realize they’re the same thing under the hood. </p>
+   
+    ---
+    # Titulo
+   
+    ---
+    # Titulo
+   
+    ---
+    # Titulo
+   
+    ---
+    # Titulo
+   
+    ---
+    # Titulo
+   
+    ---
+    # Titulo
+   
+    ---
+ 
   </textarea>
   <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
   </script>

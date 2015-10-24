@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<meta name="robots" content="noindex">
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Lab 01-02</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+	<link rel="stylesheet" href="http://purecss.io/combo/1.18.13?/css/layouts/pricing.css">
+	<script src="Lab0201Controller.js"></script>
+</head>
+<body ng-app="labApp" ng-controller="Lab0201Controller">
+	<div class="pure-g">
+		<div class="l-box">
+			<div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+				<h1>Uma tabelinha:</h1>
+
+				<div ng-show="selected_phone" class="row">
+					<div class="span6">
+						<img ng-src="{{selected_phone.imageUrl}}" class="bordinha">
+					</div>
+					<div class="span6">
+						<div>
+							<div>
+								id: {{ selected_phone.id }}
+							</div>
+							<div>
+								age: {{ selected_phone.age }}
+							</div>
+							<div>
+								Modelo: {{ selected_phone.name }}
+							</div>
+							<div>
+								Descrição: {{ selected_phone.snippet }}
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div>
+					<table class="table">
+						<tr>
+							<th></th>
+							<th>Modelo</th>
+							<th>Descrição</th>
+						</tr>
+						<tr ng-repeat="phone in phones" ng-click="select(phone)" ng-class="{selected: phone.is_selected}">
+							<td><img ng-src="{{phone.imageUrl}}" class="thumb40"></td>
+							<td>{{phone.name}}</td>
+							<td>{{phone.snippet}}</td>
+						</tr>
+					</table>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>
