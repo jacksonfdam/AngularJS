@@ -1,15 +1,24 @@
 <!doctype html>
-<html ng-app>
+<html ng-app="labApp">
 <head>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.js"></script>
-</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+	<link rel="stylesheet" href="http://purecss.io/combo/1.18.13?/css/layouts/pricing.css">
 </head>
 <body>
-	<div ng-controller="MyController">
-	<h1>Data {{ clock }}!</h1>
+	<div class="pure-g">
+		<div class="l-box">
+			<div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4" ng-controller="Lab04Controller">
+				<h1>Data {{ clock }}!</h1>
+			</div>
+		</div>
 	</div>
+
+	
 	<script type="text/javascript">
-		function MyController($scope) {
+		var labApp = angular.module('labApp', []);
+
+		labApp.controller('Lab04Controller', function($scope) {
 			$scope.clock = new Date();
 			var updateClock = function() {
 				$scope.clock = new Date();
@@ -18,7 +27,9 @@
 				$scope.$apply(updateClock);
 			}, 1000);
 			updateClock();
-		};
+		});
+
+		
 	</script>
 </body>
 </html>

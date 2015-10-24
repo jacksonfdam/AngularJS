@@ -1,21 +1,84 @@
 <!DOCTYPE html>
 <meta name="robots" content="noindex">
-<html ng-app>
+<html>
 <head>
 	<meta charset="utf-8">
 	<title>Lab 01-03</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+	<link rel="stylesheet" href="http://purecss.io/combo/1.18.13?/css/layouts/pricing.css">
 </head>
-<body>
-	<div ng-controller="Lab0103Controller">
-		<input ng-model="nome" type="text" placeholder="Seu nome"/>
-		<h1>Olá, {{nome}}</h1>
-	</div>
+<body ng-app>
+<!--
+Lembre-se:
 
-	<script type="text/javascript">
-	function Lab0103Controller($scope){
-		$scope.nome = "Jackson";
-	}
-	</script>
+AngularJS Extends HTML
+AngularJS extends HTML with ng-directives.
+The ng-app directive defines an AngularJS application.
+The ng-model directive binds the value of HTML controls (input, select, textarea) to application data.
+The ng-bind directive binds application data to the HTML view.
+
+-->
+	<div class="pure-g">
+		<div class="l-box">
+			<div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+				<form class="pure-form pure-form-aligned">
+					<fieldset>
+						<div class="pure-control-group">
+							<input ng-model="nome" type="text" placeholder="Seu nome"/>
+							<h1>Olá, {{nome}}</h1>
+						</div>
+
+						<div class="pure-control-group">
+							Informe um número: <input type="text" ng-model="umnumero">
+							<div class="well">
+								O número ao quadrado é <strong>{{ umnumero * umnumero }}</strong>
+								(pois é, o javascript não tá nem aí se isso é uma string, vc não sabia?)
+							</div>
+						</div>
+
+						<div class="pure-control-group">
+							E com select?
+							<select ng-model="myoption">
+								<option value="um">Primeiro</option>
+								<option value="2">Segundo</option>
+								<option value="III">Terceiro</option>
+							</select>
+							<div class="well">
+								Você escolheu <strong>{{ myoption }}</strong>
+							</div>
+						</div>
+
+						<div class="pure-control-group">
+							<label for="remember" class="pure-checkbox">
+								<input id="remember" type="checkbox" ng-model="meubooleano"> Lembre-se
+							</label>
+							<div class="well">
+								Tá marcado? <strong>{{ meubooleano }}</strong>
+							</div>
+						</div>
+
+						<div class="pure-control-group">
+							O que acontece?
+							<select ng-model="myoptions" multiple>
+								<option value="um">Primeiro</option>
+								<option value="2">Segundo</option>
+								<option value="III">Terceiro</option>
+							</select>
+							<div class="well">
+								Você escolheu <strong>{{ myoptions }}</strong>, essa nem eu sabia (mas eu desconfiava...)
+							</div>
+						</div>
+
+						<div class="pure-control-group">
+
+						</div>
+
+					</fieldset>
+				</form>
+
+			</div>
+		</div>
+	</div>
 </body>
 </html>

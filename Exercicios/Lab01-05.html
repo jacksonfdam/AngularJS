@@ -1,24 +1,53 @@
 <!doctype html>
 <html ng-app>
 <head>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.js"></script>
-</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+	<link rel="stylesheet" href="http://purecss.io/combo/1.18.13?/css/layouts/pricing.css">
+
+	<style type="text/css">
+		.cabeca_pra_baixo {
+			-webkit-transform: rotate(180deg);
+			-moz-transform: rotate(180deg);
+			-ms-transform: rotate(180deg);
+			-o-transform: rotate(180deg);
+			transform: rotate(180deg);
+		}
+
+		.bordinha {
+			border-radius: 10px;
+			border: solid;
+			padding: 5px;
+			border-width: 1px;
+		}
+
+		.thumb40 {
+			max-width: 40px;
+			max-height: 40px;
+		}
+
+		.selected {
+			background-color: #dff0d8;
+		}
+	</style>
 </head>
 <body>
-	<div ng-controller="MyController">
-	<h1>Data {{ clock }}!</h1>
+	<div class="pure-g">
+		<div class="l-box">
+			<div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+				<h1>Esconde-esconde</h1>
+				<span ng-hide="esconde">Agora você está me vendo...</span>
+				<span ng-show="esconde">E agora não!</span>
+				<input type="checkbox" ng-model="esconde"> Esconde!
+				<div>
+					<img ng-hide="esconde" ng-class="{cabeca_pra_baixo: virado, bordinha: combordinha}" src="https://camo.githubusercontent.com/641630b1dd62640270c79987287453a2c8fd73e4/687474703a2f2f7777772e77337363686f6f6c732e636f6d2f616e67756c61722f7069635f616e67756c61722e6a7067">
+				</div>
+				<input type="checkbox" ng-model="virado"> Vira!
+				<input type="checkbox" ng-model="combordinha"> Bota uma bordinha!
+
+			</div>
+		</div>
 	</div>
-	<script type="text/javascript">
-		function MyController($scope) {
-			$scope.clock = new Date();
-			var updateClock = function() {
-				$scope.clock = new Date();
-			};
-			setInterval(function() {
-				$scope.$apply(updateClock);
-			}, 1000);
-			updateClock();
-		};
-	</script>
+
 </body>
 </html>

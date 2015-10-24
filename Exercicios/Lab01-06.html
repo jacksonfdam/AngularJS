@@ -1,37 +1,45 @@
 <!doctype html>
 <html ng-app="app">
 <head>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.js"></script>
-</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+	<link rel="stylesheet" href="http://purecss.io/combo/1.18.13?/css/layouts/pricing.css">
+
 </head>
 <body>
-	<div ng-controller="Lab0106Controller">
-		<h4>Adicionar</h4>
-		<button ng-click="add(1)" class="button">Adicionar</button>
-		<a ng-click="subtract(1)" class="button alert">Subtrair</a>
-		<h4>Contagem {{ counter }}</h4>
-	</div>
-	<div ng-app="app">
-		<div ng-controller="OutroController">
-			<h1>Objeto {{ person }}</h1>
-			seu nome:
-			<h2>{{ person.name }}</h2>
+	<div class="pure-g">
+		<div class="l-box">
+			<div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+				<div ng-controller="Lab0106Controller">
+					<h4>Adicionar</h4>
+					<button ng-click="add(1)" class="button">Adicionar</button>
+					<a ng-click="subtract(1)" class="button alert">Subtrair</a>
+					<h4>Contagem {{ counter }}</h4>
+				</div>
+				<div ng-app="app">
+					<div ng-controller="OutroController">
+						<h1>Objeto {{ person }}</h1>
+						seu nome:
+						<h2>{{ person.name }}</h2>
+					</div>
+				</div>
+
+				<script type="text/javascript">
+					var app = angular.module('app', []);
+					app.controller('Lab0106Controller', function($scope) {
+						$scope.counter = 0;
+						$scope.add = function(amount) { $scope.counter += amount; };
+						$scope.subtract = function(amount) { $scope.counter -= amount; };
+					});
+
+					app.controller('OutroController', function($scope) {
+						$scope.person = {
+							name: "Jackson Mafra"
+						};
+					});
+				</script>
+			</div>
 		</div>
 	</div>
-
-	<script type="text/javascript">
-		var app = angular.module('app', []);
-		app.controller('Lab0106Controller', function($scope) {
-			$scope.counter = 0;
-			$scope.add = function(amount) { $scope.counter += amount; };
-			$scope.subtract = function(amount) { $scope.counter -= amount; };
-		});
-
-		app.controller('OutroController', function($scope) {
-			$scope.person = {
-				name: "Jackson Mafra"
-			};
-		});
-	</script>
 </body>
 </html>

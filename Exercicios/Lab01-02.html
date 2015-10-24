@@ -4,13 +4,20 @@
 <head>
 	<meta charset="utf-8">
 	<title>Lab 01-02</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+	<link rel="stylesheet" href="http://purecss.io/combo/1.18.13?/css/layouts/pricing.css">
 	<script src="Lab01Controller.js"></script>
 </head>
 <body ng-controller="Lab01Controller">
-	<button ng-click="incrementar()">Clicar</button>
-	<label>Você clicou: {{total}} veze(s)</label>
+	<div class="pure-g">
+		<div class="l-box">
+			<div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+				<button ng-click="incrementar()" class="button-success pure-button">Clicar</button>
+				<label>Você clicou: {{total}} veze(s)</label>
 
-	
+			</div>
+		</div>
+	</div>
 </body>
 </html>

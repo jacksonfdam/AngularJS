@@ -1,9 +1,8 @@
 var labApp = angular.module('labApp', []);
 
-function Lab01Controller($scope) {
+labApp.controller('Lab01Controller', function($scope) {
     $scope.total = 0;
     $scope.incrementar = function() {
         $scope.total++
     }
-
-}
+});
