@@ -1,6 +1,8 @@
 
 ![Targettrust](http://www.targettrust.com.br/img/header-logo_v2.png)
 
+![AngularJS](http://www.w3schools.com/angular/pic_angular.jpg)
+
 # Curso de Angular
 
 1. Introdução
