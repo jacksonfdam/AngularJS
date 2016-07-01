@@ -1,0 +1,11 @@
+<div class="demo-content mdl-color--white content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+	<div class="demo-crumbs mdl-color-text--grey-500">
+		Home &gt; Produtos
+	</div>
+	<h3>Produtos</h3>
+	<ul >
+	<li ng-repeat="produto in productsList">
+		<a href="#/products/{{$index}}/">{{produto.nome}}</a>
+	</li>
+	</ul>
+</div>

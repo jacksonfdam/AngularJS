@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-	<title>Angular | Lab 02 06</title>
+	<title>Angular | Lab 02 07</title>
 
 	<!-- Add to homescreen for Chrome on Android -->
 	<meta name="mobile-web-app-capable" content="yes">
@@ -32,47 +32,6 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.deep_purple-pink.min.css">
 <link rel="stylesheet" href="https://getmdl.io/templates/text-only/styles.css">
-<style>
-
-	.demo-card-image > .mdl-card__actions {
-		height: 52px;
-		padding: 16px;
-		background: rgba(0, 0, 0, 0.2);
-	}
-	.demo-card-image__filename {
-		color: #fff;
-		font-size: 14px;
-		font-weight: 500;
-	}
-
-	.demo-card-image.mdl-card {
-		width: 200px;
-		height: 200px;
-		float: left;
-		margin: 1rem;
-		position: relative;
-	}
-
-	.demo-card-image.mdl-card:hover {
-		box-shadow: 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12), 0 5px 5px -3px rgba(0, 0, 0, .2);
-	}
-
-	.demo-card-square > .mdl-card__title {
-		color: #fff;
-		background: #03a9f4;
-	}
-
-	.demo-card-square > .mdl-card__accent {
-		background: #ff9800;
-	}
-
-	body {
-		padding: 20px;
-		background: #fafafa;
-		position: relative;
-	}
-</style>
-
 </head>
 <body ng-app="labApp" class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -80,7 +39,7 @@
 			<div class="mdl-layout--large-screen-only mdl-layout__header-row">
 			</div>
 			<div class="mdl-layout--large-screen-only mdl-layout__header-row">
-				<h3>Angular | Lab 02 06</h3><br/>
+				<h3>Angular | Lab 02 07</h3><br/>
 
 			</div>
 			<div class="mdl-layout--large-screen-only mdl-layout__header-row">
@@ -90,14 +49,26 @@
 		<main class="mdl-layout__content">
 			<div class="" id="overview">
 				<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+					<!-- INICIO DO BLOCO --> 
+					<div class="mdl-card mdl-cell mdl-cell--12-col" ng-controller="labController">
+						<div class="mdl-card__supporting-text">
+							<ul class="demo-list-item mdl-list">
+								<li class="mdl-list__item"><span class="mdl-list__item-primary-content"><a href="#/"><i class="fa fa-home"></i> Home</a></span></li>
+								<li class="mdl-list__item"><span class="mdl-list__item-primary-content"><a href="#about"><i class="fa fa-shield"></i> Sobre</a></span></li>
+								<li class="mdl-list__item"><span class="mdl-list__item-primary-content"><a href="#contact"><i class="fa fa-comment"></i> Contato</a></span></li>
+							</ul>
+						</div>
+					</div>
+					<!-- FIM DO BLOCO --> 
 
 					<!-- INICIO DO BLOCO --> 
 					<div class="mdl-card mdl-cell mdl-cell--12-col" ng-controller="labController">
 						<div class="mdl-card__supporting-text">
-							<div ng-repeat="user in users">
-								<profile user-data="user"></profile>
+							<div id="main">
+								{{message}}
 							</div>
 						</div>
+						<div ng-view></div>
 					</div>
 					<!-- FIM DO BLOCO --> 
 
@@ -113,6 +84,7 @@
 	<script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-resource.min.js"></script>
-	<script src="Lab0206Controller.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.min.js"></script>
+	<script src="Lab0207Controller.js"></script>
 </body>
 </html>
