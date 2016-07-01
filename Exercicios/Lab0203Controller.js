@@ -1,71 +1,93 @@
-var mod = angular.module('home', [])
+var locationApp = angular.module("locationApp",[]);
+locationApp.controller('userPositionController', function($scope, $http) {
+    $scope.zipcode = 0;
+    $scope.humidity = 0;
+    $scope.temp = 0;
+    $scope.temp_max = 0;
+    $scope.temp_min = 0;
+    $scope.lat = 0;
+    $scope.lon = 0;
+    $scope.latlon = $scope.lat + ',' + $scope.lon;
+    $scope.staticMapUrl ='https://placeholdit.imgix.net/~text?txtsize=33&txt=300%C3%97300&w=300&h=300';
+    $scope.staticWeatherUrl ='https://placeholdit.imgix.net/~text?w=20&h=20';
 
-mod.factory('PhoneApi', function(){
-    function get_phone(id){
-        var path = 'phones/'+id+'.json';
-        return $.get(path);
+    /*PEGA GEOPOSITION*/
+    $scope.getUserLocation = function(){
+        $http({
+            method: 'GET',
+            url: 'http://ipinfo.io',
+            params: {}
+        }).then(function(obj) {
+            $scope.data = obj.data;
+            $scope.lat = $scope.data.lat = obj.data.loc.split(',')[0];
+            $scope.lon = $scope.data.lon = obj.data.loc.split(',')[1];
+            $scope.latlon = $scope.lat + ',' + $scope.lon;
+            $scope.getWeatherOnUserLocation();
+        });
     }
 
-    return {
-        get_phone: get_phone
-    };
-});
-
-
-function MyCtrl($scope, PhoneApi){
-
-    $scope.select = function(p){
-        $scope.loading = true;
-        PhoneApi.get_phone(p.id).success(function(data){
-            $scope.loading = false;
-            $scope.selected_phone = data;
-            $scope.selected_phone.selected_image = data.images[0];
-            $scope.$digest()
+    /*PEGA WEATHER INFO*/
+    $scope.getWeatherOnUserLocation = function(){
+        $http({
+            method: 'GET',
+            url: 'http://api.openweathermap.org/data/2.5/weather',
+            params: {
+                lat:$scope.lat,
+                lon:$scope.lon,
+                units:'metric',
+                APPID:'e036195e96fe8ea62f54d5170035147b'
+            }
+        }).then(function(obj) {
+            $scope.humidity = obj.data.main.humidity;
+            $scope.temp = obj.data.main.temp;
+            $scope.temp_max = obj.data.main.temp_max;
+            $scope.temp_min = obj.data.main.temp_min;
+            $scope.staticWeatherUrl = 'http://openweathermap.org/img/w/'+obj.data.weather[0].icon+'.png'
         });
-    };
+    }
 
-    $scope.select_image = function(img){
-        $scope.selected_phone.selected_image = img;
-    };
+    /*PEGA ZIP CODE*/
+    $scope.getUserZipCode = function(){
+        $http({
+            method: 'GET',
+            url: 'https://viacep.com.br/ws/' + $scope.zipcode + '/json/'
+        }).then(function(obj) {
+            console.log(obj.data)
+            $scope.cep = obj.data.cep;
+            $scope.logradouro = obj.data.logradouro;
+            $scope.complemento = obj.data.complemento;
+            $scope.bairro = obj.data.bairro;
+            $scope.uf = obj.data.uf;
+            $scope.localidade = obj.data.localidade;
+            $scope.ibge = obj.data.ibge;
+            $scope.gia = obj.data.gia;
+        });
+    }
 
-    $scope.phones = [
-        {
-            "age": 0, 
-            "id": "motorola-xoom-with-wi-fi", 
-            "imageUrl": "img/phones/motorola-xoom-with-wi-fi.0.jpg", 
-            "name": "Motorola XOOM\u2122 with Wi-Fi", 
-            "snippet": "The Next, Next Generation\r\n\r\nExperience the future with Motorola XOOM with Wi-Fi, the world's first tablet powered by Android 3.0 (Honeycomb)."
-        }, 
-        {
-            "age": 1, 
-            "id": "motorola-xoom", 
-            "imageUrl": "img/phones/motorola-xoom.0.jpg", 
-            "name": "MOTOROLA XOOM\u2122", 
-            "snippet": "The Next, Next Generation\n\nExperience the future with MOTOROLA XOOM, the world's first tablet powered by Android 3.0 (Honeycomb)."
-        }, 
-        {
-            "age": 2, 
-            "carrier": "AT&amp;T", 
-            "id": "motorola-atrix-4g", 
-            "imageUrl": "img/phones/motorola-atrix-4g.0.jpg", 
-            "name": "MOTOROLA ATRIX\u2122 4G", 
-            "snippet": "MOTOROLA ATRIX 4G the world's most powerful smartphone."
-        }, 
-        {
-            "age": 3, 
-            "id": "dell-streak-7", 
-            "imageUrl": "img/phones/dell-streak-7.0.jpg", 
-            "name": "Dell Streak 7", 
-            "snippet": "Introducing Dell\u2122 Streak 7. Share photos, videos and movies together. It\u2019s small enough to carry around, big enough to gather around."
-        }, 
-        {
-            "age": 4, 
-            "carrier": "Cellular South", 
-            "id": "samsung-gem", 
-            "imageUrl": "img/phones/samsung-gem.0.jpg", 
-            "name": "Samsung Gem\u2122", 
-            "snippet": "The Samsung Gem\u2122 brings you everything that you would expect and more from a touch display smart phone \u2013 more apps, more features and a more affordable price."
+    $scope.buscaCep = function(){
+        $http({
+            method: 'GET',
+            url: 'http://maps.google.com/maps/api/geocode/json?address='+$scope.latlon+'&sensor=false'
+        }).then(function(obj) {
+            console.log(obj.data)
+            for (j = 0; j < obj.data.results[0].address_components.length; j++) {
+                if (obj.data.results[0].address_components[j].types[0] == 'postal_code')
+                    $scope.zipcode = parseInt(obj.data.results[0].address_components[j].short_name + '000');
+            }
+            
+        });
+    }
+
+    $scope.getUserLocation();
+    $scope.$watch('latlon', function(latlon) {
+        $scope.staticMapUrl = "http://maps.googleapis.com/maps/api/staticmap?center=" + $scope.latlon + "&zoom=18&scale=false&size=300x300&maptype=roadmap&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C" + $scope.latlon + "&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7C-30.014728899999994,-51.195155299999996";
+    }); 
+
+    $scope.$watch('zipcode', function(zipcode) {
+        console.log(zipcode);
+        console.log((''+$scope.zipcode).length);
+        if((''+$scope.zipcode).length == 8){
+            $scope.getUserZipCode();
         }
-    ];
-}
-
+    });  
+});
