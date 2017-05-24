@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Angular</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <style type="text/css">
+    @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+    @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+    @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+    body { font-family: 'Droid Serif'; }
+    h1, h2, h3 {
+      font-family: 'Yanone Kaffeesatz';
+      font-weight: normal;
+    }
+    .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    .remark-slide-content{background: transparent;}
+    .remark-slide {
+      background: #133237 center center no-repeat;
+      background-size: cover;
+      color: #fff;
+    }
+    .remark-slide-number{color: #fff;font-size: 1rem;font-weight: bold;}
+    a, a:link,a:hover,a:visited{
+        color: #3B7983;
+        text-decoration: none;        
+    }
+
+  </style>
+</head>
+<body>
+  <textarea id="source" style="display:none;">
+
+    class: center, middle
+
+    # Angular
+
+    
+    <img src="http://cdn2.hubspot.net/hubfs/339059/project_phoenix/angularjs.jpg" alt="Angular" style="max-width: 75%;" />
+    
+
+    ---
+
+    # Angular
+    ###O que mudou da versão 1.x?
+
+    Cairam :
+    
+     - $scope
+     - Controllers
+     - angular.module
+     - jqLite
+     - Directive deﬁnition Object
+
+    ---
+
+    # Angular
+    ###O que mudou da versão 1.x?
+
+    - O Angular 1.X não vai a lugar algum!
+    - Angular 1.x é estável;
+    - Algumas pessoas ainda usam IE 8
+    - Versões antigas do Android
+    - Web Forms para .NET
+
+    ---
+    #  ES6, ECMAScript 6, ou ES2015 
+
+
+    ES6, ECMAScript 6 ou ES2015, é simplesmente a mais nova versão do JavaScript.
+    Na verdade, o nome mais usado atualmente é ES2015. A ideia do comitê responsável (conhecido como TC39) pelas atualizações da linguagem é justamente fazer um 
+    release anual. 
+    
+    Então em 2016 teremos ES2016 (ou ES7). E assim sucessivamente.
+
+    ---
+     #  ES6, ECMAScript 6, ou ES2015 
+    
+    Uma dúvida bem comum é o porquê dessa mudança do nome. 
+    Na verdade não houve nenhuma mudança: JavaScript é como nós chamamos a linguagem, só que esse nome é um trademark da Oracle (que veio após a compra da Sun). 
+    O nome oficial da linguagem é ECMAScript. E ES é simplesmente uma abreviação do mesmo.
+
+    ---
+    #  ES6, ECMAScript 6, ou ES2015 
+    ## Objetivos do ES6
+
+        - O TC39 focou em alguns objetivos no desenvolvimento do ES6:
+        - Ser uma linguagem melhor para construir aplicações complexas
+        - Resolver problemas antigos do JavaScript
+        - Facilidade no desenvolvimento de libraries
+        - Esses objetivos ficarão mais claros quando olharmos na prática as features do ES6.
+    
+    ---
+    class: center, middle
+
+    # Tabela de Compatibilidade ES6
+
+    https://kangax.github.io/compat-table/es6/     
+    
+    ---
+    
+    #  ES6, ECMAScript 6, ou ES2015 
+
+    O ECMA 6 “Harmony” traz um monte de funcionalidades novas, tais como uma API Promise nativa, “Arrow functions”, funções geradoras, Maps e Sets e muito mais. 
+    AngularJS 2.0 sofreu uma reescrita completa. O suporte ao Angular V1 será mantido durante cerca de dois anos após o lançamento do Angular V2.
+
+    ---
+
+    # O TypeScript
+
+    O TypeScript é uma linguagem para desenvolvimento de aplicações escaláveis que usam JavaScript. 
+    A linguagem trás classes, interfaces, modules e variáveis tipadas que ficam disponíveis quando se está desenvolvendo, mas são transcompiladas para JavaScript e funcionam em qualquer browser que suporte pelo menos ES3. 
+    O TypeScript é desenvolvido e suportado pela Microsoft, e tem como um dos criadores, nada mais nada menos que, Anders Hejlsberg, o pai do C# e do Delphi.
+    
+    ---
+
+    # O TypeScript
+
+    A linguagem implementa os padrões do JavaScript, inclusive as novas funcionalidades do ES6, assim pode ser incorporada em qualquer aplicação que já esteja em produção. 
+    O ganho é notável, sendo possível identificar erros básicos durante o processo de desenvolvimento, além de tornar sua aplicação organizada, algo que o JavaScript deixa a desejar, 
+    gerando Bbms (Big Ball of Mud) catastróficas.
+
+    ---
+
+    # Como me Preparar?
+    
+    O site oficial do TypeScript trás tutorial de como instalar e começar a programar, além de uma lista completa de todas as funcionalidades. 
+    Existe também um editor online com exemplos, que podem ser editados, trasncompilados e executados. O que fiz para aprender a linguagem foi portar minhas aplicações e meus plugins 
+    feitos em JavaScript para TypeScript e ajudar a manter bibliotecas portadas para DefinitelyTyped.
+
+    ---
+    #O Angujar JS 2.0
+
+    As mudanças vão da criação de um App até a definição de uma View. Tudo realmente muito diferente, mas o time do Angular JS já disse que será feito algo para compatibilizar a versão 1.x com a 2.0 sem que seja necessário um porte completo da aplicação legada.
+
+    ---
+    
+    # O Angujar JS 2.0
+
+    A versão 2.0 tenta trazer metadata com Annotations e aplicação de técnicas como Shadow DOM (utilizado no Polymer) para simplificar a programação e melhorar a performance das aplicações. Além disso, você pode escrever usando TypeScript, que fornece meios de identificar problemas durante o desenvolvimento.
+
+    ---
+
+    # Como me Preparar?
+
+    O site oficial trás documentação e tutorial de como instalar e começar. Aconteceu também o evento oficial do Angular (ANGULAR U) que levou os principais desenvolvedores e influenciadores para falar sobre as novidades.
+
+    <p>Angular 2.0 – 5 MIN QUICKSTART - https://angular.io/docs/js/latest/quickstart.html</p>
+    <p>Angular 2.0 – STEP BY STEP GUIDE - https://angular.io/docs/js/latest/guide/</p>
+    <p>Dan and John Bringing Their View On The Latest In Angular - https://www.youtube.com/watch?v=XQzehz5i4Rg&index=4&list=WL</p>
+    <p>Angular 2 Forms - https://www.youtube.com/watch?v=MbF9TvnzCBQ</p>
+
+    ---
+
+    # O que aconteceu com o Angular 3?
+
+    O Engenheiro de Software, Igor Minar, explicou recentemente numa conferência sobre Angular na Bélgica: da NG-BE 2016, que o Google iria pular da versão 2 para a versão 4. 
+    
+    Mas que essa mudança brusca está relacionada com o número de atualizações correlacionadas as rotas da versão 4 do Angular, que estão planejadas para uso com o lançamento.
+
+    ---
+
+    # O que aconteceu com o Angular 3?
+
+      Com o Angular 2, a equipe introduziu a Semantic Versioning, que nada mais nada menos faz com que atribui uma versão de 3 números a uma nova versão: major, minor, patch. 
+      
+      Para ficar mais claro, vejam o exemplo da figura abaixo:
+
+      <img src="https://code4coders.files.wordpress.com/2017/03/versioning.png" />
+
+    ---
+    # O que aconteceu com o Angular 3?
+
+
+    ### Com o próprio site do semver.org explica
+
+    - ***versão Maior (MAJOR)***: quando fizer mudanças incompatíveis na API,
+    - ***versão Menor (MINOR)***: quando adicionar funcionalidades mantendo compatibilidade, 
+    - E, ***versão de Correção (PATCH)***: quando corrigir falhas mantendo compatibilidade.  
+
+    ---
+    # O que aconteceu com o Angular 3?
+
+    A mudança de agora é a alteração na versão do TypeScript utilizada. Atualmente, na versão 2.3.x o Angular utiliza a versão 1.8 do TypeScript. 
+    
+    A mudança prevê a alteração para a 2.1 ou até, quem sabe, para a 2.2. Só o tempo dirá.
+
+    Isso explica o pulo de versão, mas não explica o 4. Mas o @angular/router explica. Todos os packages no npm do @angular estão alinhados com a versão 2.3.x, menos o router. 
+    
+    Por algum motivo (e alguns esporros), o router está na versão 3.3.x. Pra deixar todo mundo alinhado no mesmo número de versão, e batendo com o que o SemVer manda 
+    
+    (um major release tem que ser x.0.0), a nova versão precisa ser a 4.0.0.
+    
+    ---
+
+    #É SÓ “ANGULAR”
+
+    Como o time recomenda, o nome a ser utilizado é só Angular. Não Angular 2, não Angular 4, não Angular N. Só, Angular.
+
+    É difícil se acostumar a um primeiro momento, principalmente dada a relevância que o Angular 1 ainda tem (o que é uma pena na minha humilde opinião). Quem sabe com a chegada do 4, de chamar só de “Angular” fica mais natural.
+
+    A previsão é ter um Major Release a cada 6 meses. Então, se do contrário de todas as previsões o mundo não acabar, lá pro início de 2018, já estaremos na versão 6 na ponta da agulha.
+
+
+    ---
+    # Angular 4?
+
+    Rótulos adicionais para pré-lançamento(pre-release) e metadados de construção(build) estão disponíveis como extensão ao formato MAJOR.MINOR.PATCH.
+
+    E no caso do Angular 4, a equipe usou a especificação de versionamento semântico, ou mais conhecido como: SemVer.
+
+    E de acordo com o Engenheiro Minar, para o futuro próximo a equipe de Angular planeja mudar para o uso do TypeScript 2.1 ou mesmo 2.2 (que foi o que aconteceu). 
+    
+    E com isso, envolverá mudanças de ruptura que significam a introdução de uma nova versão principal.
+
+    ---
+    # Angular 4
+
+    Mas, calma! Se você sabe Angular 2…. não vai mudar em nada com a nova versão 4!  
+    
+    Como o próprio Minar disse: “Queremos evitar quebras de ruptura nos códigos, assim como aconteceu com Angular 1.x para 2.x!”
+
+    ---
+    # Angular – Compilação Antecipada (AOT) – View Engine
+
+    Uma das maiores mudanças, provavelmente a maior mudança, como desenvolvedor você não verá a diferença…. Mas o que seria?! Como você deve saber, no modo AOT, o Angular compila seus modelos durante a compilação e gera um código JavaScript – justamente por oposição ao modo Just in Time, onde esta compilação é realizada em tempo de execução, quando a app é iniciada.
+
+    O AOT tem várias vantagens: se um dos seus modelos estiverem com erros e incorretos em tempo de compilação, em vez de ter que esperar em tempo de execução, a aplicação iniciará mais rápido, uma vez que gerador de código já estará pronta. Simples assim. Na maioria das aplicações os pacotes maiores ficam com a responsabilidade do AOT. 
+
+    ---
+    # Angular – Universal: O isomorphic do Angular 2/4
+
+    <img src="https://code4coders.files.wordpress.com/2017/03/angular-universal.png?w=700" />
+
+    Para os que já vem usando o Angular 2, o Universal não é tão uma novidade aqui. Mas, para o projeto Angular 4, os Engenheiros do Google aproveitaram para trabalharem bastante em cima do projeto Universal, que nada mais permite que você faça a renderização no lado do servidor. 
+    
+    O projeto foi mantido principalmente pela comunidade, que a partir deste lançamento é agora um projeto oficial do Angular.
+
+    Detalhes https://universal.angular.io/
+
+
+    ---
+    # Angular – Animações
+
+    As Animações tem agora seu próprio pacote em:
+
+    > @angular/platform-browser/animations 
+    
+    Essa é uma das poucas mudanças que caso você esteja usando o Angular 2 precisará mudar para atualizar na sua aplicação. Isso significa que, o pacote enviado para o seus usuários não irá incluir um código inútil se você usar animações em sua aplicação.
+
+    ---
+    # Angular – Templates agora em Angular é: ng-template
+
+    Sim…. a tag ‘Template’ está obsoleta (ou deprecated). E agora, o que eu tenho que fazer?!! Simples. você deve usar a tag: ‘ng-template‘! 😀 😀 😀
+
+    Mas, por que a mudança?! Estava bastante confuso para os desenvolvedores trabalhar com uma tag chamada: template no HTML, como sendo um WEB Component. 
+    Agora o Angular tem sua própria tag de modelo: ng-template. Você será avisado caso use a versão absoleta em algum lugar, quando for usar a versão 4, deixando assim, mais fácil de detectá-los.
+
+    
+    ---
+    # Angular – Condições: ngIf…. com else
+
+    Agora é possível usar a condição ‘else’ nos seus templates. Por exemplo:
+
+        <div *ngIf="produtos.length > 0; else empty"><h2>Produtos</h2></div>
+        <ng-template #empty><h2>Não tem produtos.</h2></ng-template>
+    
+    ---
+    # Angular – Palavra reservada: As
+
+    Outra mudança que foi adicionada uma palavra chave chamada: as. Essa palavra serve para poder simplificar a sintaxe: let. 
+    Ela permite armazenar um determinado resultado em uma variável do modelo, para usar no elemento. Outro ponto é que, pode ser útil para armazenar uma coleção de slices. Por exemplo:
+
+        <div *ngFor="let dog of dogs | slice:0:2 as total; index as = i">
+        {{i+1}}/{{total.length}}: {{dog.name}}
+        </div>
+    
+    ---
+    # Angular – Titlecase
+
+    O Angular 4 intoduziu na sua versão o novo: ‘titlecase’ pipe. A qual permite mudar a primeira leta de cada palavra para maiúscula:
+
+        <p>{{ 'cidade maravilhosa' | titlecase }}</p>
+        <!-- saída será: 'Cidade Maravilhosa' -->
+    
+    ---
+    # Angular – HTTP:
+
+    Agora ficou muito mais simples os parâmetros de pesquisa de uma determinada solicitação HTTP. Veja o exemplo abaixo:
+
+
+        http.get(`${baseUrl}/api/produtos`, { params: { sort: 'ascending' } });
+
+    Antes você tinha que fazer da seguinte maneira:
+
+
+        const params= new URLSearchParams();
+        params.append('sort', 'ascending');
+        http.get(`${baseUrl}/api/produtos`, { search: params });
+
+    ---
+    # Angular – Testes
+
+    Sim, a classe TestBed teve mudanças significativas (para quem não sabe sobre o TestBed clique [AQUI]. Também ficou muito mais simples de usar. Vejam exemplo:
+
+
+        TestBed.overrideTemplate(ProdutoComponent, '<h2>{{produto.name}}</h2>');
+    
+    ---
+    # Angular – TypeScript: 2.1 e 2.2
+
+    Bom, na versão 4 do Angular, o TypeScript foi atualizado para a sua versão mais atualizada: 2.2. Há um tema bastante controverso aqui, uma vez que nem todos os desenvolvedores gostam de usar o TypeScript junto com o Angular. Mas, calma. Caso você queira usar o Angular sem o TypeScript, pode ser usado tranquilamente.
+
+    Mas, para aqueles que gostam do transpiler. Fiquem sabendo que o TypeScript está incluso nessa nova versão do Angular 4.
+
+    ---
+    class: center, middle
+
+    # The Only thing that´s changed is everything.
+    ---
+    
+    # Referencias e Links
+    
+     - https://medium.com/@matheusml/o-guia-do-es6-tudo-que-voc%C3%AA-precisa-saber-8c287876325f
+     - https://speakerdeck.com/jcemer/evolucao-e-futuro-do-uso-de-paradigmas-no-javascript
+     - http://codingfirst.azurewebsites.net/o-que-ha-de-novo-e-como-me-preparar-es6-typescript-e-angular-js-2-0/
+     - https://joselito.space/saiu-o-angular-4-beta-0-e-ta-tudo-bem/
+     - https://code4coders.wordpress.com/2017/03/27/angular-4-0-e-suas-novas-features-e-agora-jose/
+     - https://www.youtube.com/playlist?list=PLGxZ4Rq3BOBoSRcKWEdQACbUCNWLczg2G
+     - https://www.schoolofnet.com/curso-angular-2-0-primeiros-passos/
+     - https://medium.com/by-vinicius-reis/o-que-e-react-ng2-auleria-vue-e34b0c77b5a1
+
+  </textarea>
+  <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+  </script>
+  <script>
+    var slideshow = remark.create();
+  </script>
+</body>
+</html>
