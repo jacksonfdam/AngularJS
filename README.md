@@ -14,3 +14,5 @@
 7. Controllers
 8. Services
 9. Factories
+
+[Slides Angular 2 e 4](http://cdn.rawgit.com/jacksonfdam/AngularJS/master/Exercicios/slides-angular-2-4.html#1)
