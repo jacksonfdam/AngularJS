@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Usuarios</title>
+
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <!--
+        Roteamento
+        https://docs.angularjs.org/api/ngRoute/service/$route#example
+    -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+
+    <!--
+        Internacionalização:
+        https://docs.angularjs.org/guide/i18n
+    -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-i18n/1.6.4/angular-locale_pt-br.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            padding-top: 10px;
+            background-color: #F5F5F5;
+        }
+
+        .navbar-brand {
+            position: relative;
+            z-index: 2;
+        }
+
+        .navbar-nav.navbar-right .btn {
+            position: relative;
+            z-index: 2;
+            padding: 4px 20px;
+            margin: 10px auto;
+            transition: transform 0.3s;
+        }
+
+        .navbar .navbar-collapse {
+            position: relative;
+            overflow: hidden !important;
+        }
+
+        .navbar .navbar-collapse .navbar-right>li:last-child {
+            padding-left: 22px;
+        }
+
+        .navbar .nav-collapse {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: 0;
+            padding-right: 350px;
+            padding-left: 80px;
+            width: 100%;
+        }
+
+        .navbar.navbar-default .nav-collapse {
+            background-color: #f8f8f8;
+        }
+
+        .navbar.navbar-inverse .nav-collapse {
+            background-color: #222;
+        }
+
+        .navbar .nav-collapse .navbar-form {
+            border-width: 0;
+            box-shadow: none;
+        }
+
+        .nav-collapse>li {
+            float: right;
+        }
+
+        .btn.btn-circle {
+            border-radius: 50px;
+        }
+
+        .btn.btn-outline {
+            background-color: transparent;
+        }
+
+        .navbar-nav.navbar-right .btn:not(.collapsed) {
+            background-color: rgb(111, 84, 153);
+            border-color: rgb(111, 84, 153);
+            color: rgb(255, 255, 255);
+        }
+
+        .navbar.navbar-default .nav-collapse,
+        .navbar.navbar-inverse .nav-collapse {
+            height: auto !important;
+            transition: transform 0.3s;
+            transform: translate(0px, -50px);
+        }
+
+        .navbar.navbar-default .nav-collapse.in,
+        .navbar.navbar-inverse .nav-collapse.in {
+            transform: translate(0px, 0px);
+        }
+
+
+        @media screen and (max-width: 767px) {
+            .navbar .navbar-collapse .navbar-right>li:last-child {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .navbar .nav-collapse {
+                margin: 7.5px auto;
+                padding: 0;
+            }
+            .navbar .nav-collapse .navbar-form {
+                margin: 0;
+            }
+            .nav-collapse>li {
+                float: none;
+            }
+
+            .navbar.navbar-default .nav-collapse,
+            .navbar.navbar-inverse .nav-collapse {
+                transform: translate(-100%, 0px);
+            }
+            .navbar.navbar-default .nav-collapse.in,
+            .navbar.navbar-inverse .nav-collapse.in {
+                transform: translate(0px, 0px);
+            }
+
+            .navbar.navbar-default .nav-collapse.slide-down,
+            .navbar.navbar-inverse .nav-collapse.slide-down {
+                transform: translate(0px, -100%);
+            }
+            .navbar.navbar-default .nav-collapse.in.slide-down,
+            .navbar.navbar-inverse .nav-collapse.in.slide-down {
+                transform: translate(0px, 0px);
+            }
+        }
+    </style>
+    <script type="text/javascript">
+        angular.element(document.getElementsByTagName('head')).append(angular.element('<base href="' + window.location.pathname + '" />'));
+    </script>
+</head>
+
+<body ng-app="lab0126App">
+
+    <div ng-controller="MainController">
+        <div ng-include="'header.html'"></div>
+    </div>
+    <div class="container" ng-view>
+
+    </div>
+    <!-- /.container -->
+
+    <hr />
+
+    <script type="text/ng-template" id="adicionar.html">
+        <h2> Adicionar Usuario </h2>
+        {{message}}
+
+    </script>
+
+    <script type="text/ng-template" id="diretiva_usuario.html">
+        <a href="#!/usuarios/perfil/{{indice}}">
+            <img ng-src="{{user.picture.large}}" class="img-responsive" ng-title="{{user.name.first + " " + user.name.last}}"/>
+            <h4>{{user.name.first + " " + user.name.last}}</h4>
+        </a>
+        <p>{{user.email}}</p>
+        <p><span class="label label-warning">{{user.dob | calculaIdade}} anos</span></p>
+        <p ng-switch="user.gender">
+            <span ng-switch-when="male" class="label label-default">Homen</span>
+            <span ng-switch-when="female" class="label label-info">Mulher</span>
+        </p>
+
+    </script>
+
+    <script type="text/ng-template" id="lista.html">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Listar Usuario</h2>
+                <p>{{message}}</p>
+            </div>
+            <div class="col-lg-6">
+                <form class="form-inline">
+                    <div class="col-lg-3">
+                        <select class="form-control" placeholder="Ordenar por:" ng-model="order_me">
+                            <option value="" selected>Nenhuma ordem</option>
+                            <option value="name.first">Nome Asc</option>
+                            <option value="-name.first">Nome Desc</option>
+                            <option value="email">Email</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <select class="form-control" placeholder="Filtrar por:" ng-model="gender_search">
+                            <option value="" selected>Todos</option>
+                            <option value="male">Homens</option>
+                            <option value="female">Mulheres</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <input type="text" class="form-control" ng-model="name_search" placeholder="Search for...">
+                    </div>
+                    <!-- /input-group -->
+                </form>
+                <!-- /input-group -->
+            </div>
+            <!-- /.col-lg-6 -->
+        </div>
+        <div class="row">
+            <div class="gallery_product col-lg-3 col-md-3 col-sm-3 col-xs-6" ng-repeat="usuario in usuarios  | filter:search | orderBy: order_me ">
+                <usuario user="usuario" indice="{{$index}}" />
+            </div>
+        </div>
+
+    </script>
+
+    <script type="text/ng-template" id="perfil.html">
+        <img ng-src="{{usuario.picture.large}}" class="img-responsive" ng-title="{{usuario.name.first + "
+            " + usuario.name.last}}"/>
+        <h4>{{usuario.name.first + " " + usuario.name.last}}</h4>
+        <p><strong>e-mail: </strong>{{usuario.email}}</p>
+        <p><strong>celular: </strong>{{usuario.cell}}</p>
+        <p><strong>telefone: </strong>{{usuario.phone}}</p>
+        <p ng-switch="usuario.gender">
+            <span ng-switch-when="male" class="label label-default">Homen</span>
+            <span ng-switch-when="female" class="label label-info">Mulher</span>
+        </p>
+        <p><strong>Data de Nascimento: </strong>{{usuario.dob |formatDate | date:"dd/MM/y"}} - <span class="label label-warning">{{usuario.dob | calculaIdade}} anos</span></p>
+        <h4>Situado</h4>
+        <p><strong>Cidade: </strong>{{usuario.location.city}}</p>
+        <p><strong>Estado: </strong>{{usuario.location.state}}</p>
+        <p><strong>Pais: </strong>{{usuario.nat}}</p>
+        <p>
+            <img src="{{staticMapUrl}}" style="width: 300px;height: 300px;">
+        </p>
+
+    </script>
+
+    <script type="text/ng-template" id="header.html">
+
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-3">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Brand</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-collapse-3">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Produtos</a></li>
+                        <li><a href="#">Serviços</a></li>
+                        <li class="dropdown">
+                            <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuários <span class="caret"></span></a>
+                            <ul class="dropdown-menu" ng-switch="auth.loggedIn">
+                                <li ng-switch-when="true">
+                                    <a href="/usuarios/adicionar"> Adicionar </a>
+                                </li>
+                                <li><a href="/usuarios/"> Listar Usuarios </a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Configurações</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Contato</a></li>
+
+                        <li>
+                            <a class="btn btn-default btn-outline btn-circle collapsed" data-toggle="collapse" href="#nav-collapse3" aria-expanded="false"
+                                aria-controls="nav-collapse3">Buscar</a>
+                        </li>
+
+                        <li ng-switch="auth.loggedIn">
+                            <span ng-switch-when="false" class="navbar-text">Olá, visitante</span>
+                            <button ng-switch-when="false" class="btn btn-default navbar-btn" ng-click="auth.login()">Entrar</button>
+                            <span ng-switch-when="true" class="navbar-text"> Seja bem vindo
+                            <a href="/usuarios/perfil/1" class="navbar-link"> Jackson </a>. </span>
+                            <button ng-switch-when="true" class="btn btn-default navbar-btn" ng-click="auth.logout()">Sair</button>
+                        </li>
+
+
+
+                    </ul>
+                    <div class="collapse nav navbar-nav nav-collapse slide-down" id="nav-collapse3">
+                        <form class="navbar-form navbar-right" role="search">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search" />
+                            </div>
+                            <button type="buttton" class="btn btn-danger"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+        <!-- /.navbar -->
+
+    </script>
+
+    <script>
+        /*
+		localStorage.setItem(nome, valor): esta função é utilizada para armazenar um valor no local storage. Cada objeto gravado é referenciado por uma chave (nome).
+		localStorage.getItem(nome): por sua vez, o getItem é usado para recuperar um valor armazenado a partir da sua chave identificadora.
+		JSON.stringfy(objeto): para armazenar os dados, utilizaremos o formato JSON e esta função transforma um objeto em string com sintaxe adequado ao JSON.
+		JSON.parse(objeto): já a função parse transforma um item no formato JSON no seu formato original.
+		*/
+
+        var listaUsuarios = localStorage.getItem("listaUsuarios");
+        listaUsuarios = JSON.parse(listaUsuarios);
+        if (listaUsuarios == null)
+            listaUsuarios = [];
+
+        localStorage.setItem("listaUsuarios", JSON.stringify(listaUsuarios));
+
+
+        (function (angular) {
+            'use strict';
+
+            var lab0126App = angular.module('lab0126App', ["ngRoute"]);
+
+            lab0126App.config(function ($routeProvider, $locationProvider) {
+                $routeProvider.
+                    when('/usuarios/adicionar', {
+                        templateUrl: 'adicionar.html',
+                        controller: 'AdicionarNovoUsuarioController'
+                    }).
+                    when('/usuarios/perfil/:usuario_id', {
+                        templateUrl: 'perfil.html',
+                        controller: 'PerfilController'
+                    }).
+                    when('/usuarios/', {
+                        templateUrl: 'lista.html',
+                        controller: 'ListaUsuariosController',
+                        resolve: {
+                            // I will cause a 1 second delay
+                            delay: function ($q, $timeout) {
+                                var delay = $q.defer();
+                                $timeout(delay.resolve, 1000);
+                                return delay.promise;
+                            }
+                        }
+                    }).
+                    otherwise({
+                        redirectTo: 'usuarios/'
+                    });
+
+                // configure html5 to get links working on jsfiddle
+                $locationProvider.html5Mode({
+                    enabled: false,
+                    requireBase: false
+                });
+            });
+
+            lab0126App.controller('MainController', function ($scope) {
+                $scope.message = 'Bem Vindo';
+            });
+
+            lab0126App.service('AuthService', function () {
+                var auth = {};
+                auth.loggedIn = false;
+                auth.login = function () {
+                    auth.loggedIn = true;
+                };
+                auth.logout = function () {
+                    auth.loggedIn = false;
+                };
+                return auth;
+            });
+
+
+            lab0126App.service('UsuariosService', function ($http, $rootScope, Storage) {
+                var service = {
+                    saveState: function (data) {
+                        Storage.setData('lista_usuarios', angular.toJson(data))
+                    },
+                    restoreState: function () {
+                        return angular.fromJson(Storage.getData('lista_usuarios'));
+                    },
+                    getData: function () {
+                        return $http({
+                            method: 'GET',
+                            url: 'https://randomuser.me/api?results=100',
+                            params: {}
+                        }).then(function (obj) {
+                            return obj.data.results;
+                        });
+                    },
+                    getUserData: function (indice) {
+                        var data = {};
+                        var lista_usuarios = angular.fromJson(Storage.getData('lista_usuarios'));
+                        if (lista_usuarios.length > 0 && typeof lista_usuarios[indice] !== "undefined") {
+                            data = lista_usuarios[indice];
+                        }
+                        return data;
+                    }
+                }
+
+                $rootScope.$on("savestate", service.saveState);
+                $rootScope.$on("restorestate", service.restoreState);
+                return service;
+            });
+
+            lab0126App.factory("Storage", function ($window, $rootScope) {
+                return {
+                    setData: function (chave, valor) {
+                        $window.localStorage && $window.localStorage.setItem(chave, valor);
+                        return this;
+                    },
+                    getData: function (chave) {
+                        return $window.localStorage && $window.localStorage.getItem(chave);
+                    }
+                };
+            });
+
+            lab0126App.controller('PerfilController', function ($scope, $routeParams, UsuariosService) {
+                $scope.message = 'Perfil do Usuario';
+                $scope.lat = 0;
+                $scope.lon = 0;
+                $scope.latlon = $scope.lat + ',' + $scope.lon;
+                $scope.staticMapUrl ='https://placeholdit.imgix.net/~text?txtsize=33&txt=300%C3%97300&w=300&h=300';
+                if (!isNaN($routeParams.usuario_id)) {
+                    $scope.usuario = UsuariosService.getUserData($routeParams.usuario_id);
+                    $scope.latlon = $scope.usuario.location.city + ","  + $scope.usuario.location.state;
+                }
+                $scope.$watch('latlon', function(latlon) {
+                    $scope.staticMapUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + $scope.latlon + "&zoom=17&scale=1&size=300x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C" + $scope.latlon;
+                }); 
+            });
+
+            lab0126App.controller('AdicionarNovoUsuarioController', function ($scope) {
+                $scope.message = 'Adicionar Usuario';
+            });
+
+            lab0126App.controller('ListaUsuariosController', function ($scope, $location, UsuariosService) {
+                $scope.message = 'Lista de Usuarios';
+                $scope.gender_search = '';
+                $scope.name_search = '';
+
+                $scope.search = function (row) {
+                    var retorno = true;
+                    if ($scope.name_search.length > 0) {
+                        retorno = angular.lowercase(row.name.first).indexOf($scope.name_search || '') !== -1;
+                    }
+                    if ($scope.gender_search.length > 0) {
+                        retorno = angular.lowercase(row.gender) === $scope.gender_search;
+                    }
+                    return retorno;
+                };
+
+                $scope.init = function () {
+                    if (UsuariosService.restoreState().length == 0) {
+                        UsuariosService.getData().then(function (data) {
+                            UsuariosService.saveState(data);
+                            $scope.usuarios = data;
+                        }).catch(function () {
+                            $scope.error = 'Não foi possivel Obter os Usuáriosr';
+                        });
+                    } else {
+                        $scope.usuarios = UsuariosService.restoreState();
+                    }
+                };
+                $scope.init();
+
+            });
+
+            lab0126App.filter('calculaIdade', function () {
+                function calculateAge(birthday) {
+                    var birthday = new Date(birthday);
+                    var ageDifMs = Date.now() - birthday.getTime();
+                    var ageDate = new Date(ageDifMs);
+                    return Math.abs(ageDate.getUTCFullYear() - 1970);
+                }
+
+                return function (birthdate) {
+                    return calculateAge(birthdate);
+                };
+            });
+            lab0126App.filter('formatDate', function () {
+                return function (date) {
+                    var dateOut = new Date(date);
+                    return dateOut;
+                };
+            });
+
+            lab0126App.directive('usuario', function () {
+                var directive = {};
+                directive.restrict = 'E';
+                /* directive.template = "Usuario: <b>{{user.name.first}}</b>"; */
+                directive.templateUrl = 'diretiva_usuario.html'
+                directive.scope = {
+                    user: "=user",
+                    indice: "@"
+                }
+                directive.link = function (scope, elem, attrs) {
+                    /*console.log('Renderizado Usuário:' + scope.indice);*/
+                }
+                return directive;
+            });
+
+            lab0126App.run(function ($rootScope, $location, AuthService) {
+                $rootScope.auth = AuthService;
+                $rootScope.someProperty = 'Olá, computador';
+                $rootScope.someAction = function () {
+                    $rootScope.someProperty = 'Olá humano';
+                };
+                $rootScope.$on('$locationChangeStart', function (event, newUrl) {
+                    console.log('Path : ' + newUrl);
+                });
+
+                $rootScope.$watch('$location.path()', function (path) {
+                    var path = $location.path();
+                    var url = $location.absUrl();
+                    var hash = $location.hash();
+                    console.log('Path : ' + path);
+                    console.log('Url : ' + url);
+                    console.log('Hash : ' + hash);
+                });
+            });
+
+
+        })(window.angular);
+    </script>
+
+</body>
+
+</html>
